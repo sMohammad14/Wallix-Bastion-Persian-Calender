@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 380px;
+      padding: 10px 15px;
+      font-family: 'Segoe UI', 'B Yekan', Tahoma, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      direction: rtl;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-top: 4px solid #EC6707;
+    }
+    .title {
+      color: #EC6707;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 0 12px 0;
+    }
+    .field-group {
+      margin-bottom: 12px;
+    }
+    label {
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      margin-bottom: 3px;
+      color: #555;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: 0.3s;
+      font-family: inherit;
+    }
+    input[type="text"]:focus {
+      border-color: #EC6707;
+      outline: none;
+      box-shadow: 0 0 5px rgba(236,103,7,0.2);
+    }
+    #hostUrl {
+      direction: ltr;
+      text-align: left;
+    }
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      background: #fafafa;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+    .profile-check {
+      margin: 0;
+      transform: scale(1.2);
+    }
+    .profile-name {
+      flex: 1;
+    }
+    .profile-cal-icon {
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .profile-date-display {
+      min-width: 180px;
+      font-size: 12px;
+      color: #555;
+      text-align: left;
+      direction: ltr;
+    }
+    button#toggle {
+      width: 100%;
+      padding: 10px;
+      background: #EC6707;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    button#toggle.secondary {
+      background: #888;
+    }
+    button#toggle.secondary:hover {
+      background: #666;
+    }
+    button#toggle:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid #eee;
+      margin: 10px 0;
+    }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .footer a {
+      color: #EC6707;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">تقویم شمسی در Wallix</div>
+    <div class="field-group" id="urlGroup">
+      <label>آدرس: FQDN یا IP</label>
+      <input type="text" id="hostUrl" placeholder="https://pam.com">
+    </div>
+
+    <div id="profileSection">
+      <div class="field-group">
+        <label>پروفایل‌های تاریخ</label>
+        <div id="profile1" class="profile-row">
+          <input type="checkbox" class="profile-check">
+          <input type="text" class="profile-name" placeholder="نام پروفایل" value="پروفایل ۱" disabled>
+          <span class="profile-cal-icon" style="display:none;">📅</span>
+          <span class="profile-date-display"></span>
+        </div>
+        <div id="profile2" class="profile-row">
+          <input type="checkbox" class="profile-check">
+          <input type="text" class="profile-name" placeholder="نام پروفایل" value="پروفایل ۲" disabled>
+          <span class="profile-cal-icon" style="display:none;">📅</span>
+          <span class="profile-date-display"></span>
+        </div>
+        <div id="profile3" class="profile-row">
+          <input type="checkbox" class="profile-check">
+          <input type="text" class="profile-name" placeholder="نام پروفایل" value="پروفایل ۳" disabled>
+          <span class="profile-cal-icon" style="display:none;">📅</span>
+          <span class="profile-date-display"></span>
+        </div>
+      </div>
+    </div>
+
+    <button id="toggle">روشن (Reload Page)</button>
+    <hr>
+    <div class="footer">by <a href="https://github.com/sMohammad14" target="_blank">sMohammad14</a></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
