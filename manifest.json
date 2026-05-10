@@ -1,5 +1,5 @@
 {
-  "manifest_version": 1.0,
+  "manifest_version": 3,
   "name": "Persian DateTime for WALLIX PAM",
   "version": "1.0",
   "description": "Persian Calander And Date Picker For WALLIX PAM",
