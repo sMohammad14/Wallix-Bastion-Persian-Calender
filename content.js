@@ -146,6 +146,8 @@
         .pam-picker-btns button.pam-ok:hover { background: #d45c06; }
         .pam-picker-btns button.pam-cancel { background: #e0e0e0; }
         .pam-picker-btns button.pam-cancel:hover { background: #ccc; }
+        .pam-picker-btns button.pam-today { background: #2196F3; color: #fff; }
+        .pam-picker-btns button.pam-today:hover { background: #1976D2; }
       </style>
       <div class="pam-picker" id="pam-calendar">
         <div class="pam-month-year">
@@ -170,6 +172,7 @@
         <div class="pam-profile-btns" id="pam-profile-btns"></div>
         <div class="pam-picker-btns">
           <button class="pam-cancel" id="pam-cancel">انصراف</button>
+          <button class="pam-today" id="pam-today">امروز</button>
           <button class="pam-ok" id="pam-ok">تأیید</button>
         </div>
       </div>`;
@@ -245,6 +248,46 @@
       closePicker(doc);
     };
     box.querySelector('#pam-ok').onclick = () => closePicker(doc);
+
+    // دکمه "امروز" با منطق جدید
+    box.querySelector('#pam-today').addEventListener('click', () => {
+      const currentValue = input.value.trim();
+      let dateObj;
+      if (!currentValue) {
+        // حالت الف: باکس خالی → زمان حال سیستم
+        dateObj = new Date();
+      } else {
+        // حالت ب: باکس پر
+        const parsed = parseDate(currentValue);
+        if (parsed && !isNaN(parsed)) {
+          const now = new Date();
+          // ساخت زمان با تاریخ امروز و ساعت/دقیقه/ثانیه از ورودی
+          const candidate = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            parsed.getHours(),
+            parsed.getMinutes(),
+            parsed.getSeconds() || 0
+          );
+          if (candidate > now) {
+            // زمان ورودی از الان جلوتر است → همان زمان ورودی با تاریخ امروز
+            dateObj = candidate;
+          } else {
+            // زمان ورودی قدیمی‌تر است → زمان فعلی سیستم
+            dateObj = now;
+          }
+        } else {
+          // اگر پارس نشد → زمان حال سیستم
+          dateObj = new Date();
+        }
+      }
+      input.value = fmtGreg(dateObj);
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      updateLabel(input, doc);
+      closePicker(doc);
+    });
 
     // بارگذاری پروفایل‌ها و ایجاد دکمه‌ها (با تأخیر برای اطمینان)
     setTimeout(() => {
